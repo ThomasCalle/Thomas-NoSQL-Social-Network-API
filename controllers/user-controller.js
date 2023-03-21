@@ -2,14 +2,14 @@ const { User } = require('../models');
 
 const UserController = {
   // 1. Get all users
-  getUsers(req, res) {
+  getAllUsers(req, res) {
     User.find({})
       .then(userData => res.json(userData))
       .catch(err => res.status(500).json(err));
   },
 
   // 2. Get one user by ID
-  getSingleUser(req, res) {
+  getUserById(req, res) {
     User.findById(req.params.id)
       .then(userData => res.json(userData))
       .catch(err => res.status(500).json(err));
@@ -23,7 +23,7 @@ const UserController = {
   },
 
   // 4. Update user by ID
-  updateUser(req, res) {
+  updateUserById(req, res) {
     User.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(userData => {
         if (!userData) {
@@ -35,7 +35,7 @@ const UserController = {
   },
 
   // 5. Delete user
-  deleteUser(req, res) {
+  deleteUserById(req, res) {
     User.findByIdAndDelete(req.params.id)
       .then(userData => {
         if (!userData) {
