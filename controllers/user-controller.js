@@ -10,11 +10,23 @@ const UserController = {
 
   // 2. Get one user by ID
   getUserById(req, res) {
-    User.findOne(req.params.id)
+    User.findById(req.params.userId)
       .then(userData => res.json(userData))
       .catch(err => res.status(500).json(err));
   },
-
+  // getUserById(req, res) {
+  //   console.log('Fetching user with ID:', req.params.id);
+  //   User.findById(req.params.id)
+  //     .then(userData => {
+  //       console.log('User data:', userData);
+  //       res.json(userData);
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //       res.status(500).json(err);
+  //     });
+  // },
+  
   // 3. Create a user
   createUser(req, res) {
     User.create(req.body)
@@ -49,7 +61,7 @@ const UserController = {
   // 6. Add friend to user's friend list
   addFriend(req, res) {
     User.findOneAndUpdate(
-      req.params.id,
+      { _id: req.params.userId },
       { $addToSet: { friends: req.body.friendId } },
       { new: true }
     )
@@ -62,34 +74,48 @@ const UserController = {
       .catch(err => res.status(500).json(err));
   },
 
-  // 7. Remove friend from user's friend list
-  removeFriend(req, res) {
+
+  // NEW 7. Remove friend from user's friend list
+
+  removeFriend({ params }, res) {
     User.findOneAndUpdate(
-      req.params.id,
-      { $pull: { friends: req.params.friendId } },
+      { _id: params.userId },
+      { $pull: { friends: params.friendId } },
       { new: true }
     )
-      .then(userData => {
-        if (!userData) {
-          return res.status(404).json({ message: 'User not found' });
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          return res.status(404).json({ message: "No user with this id!" });
         }
-        res.json(userData);
+        // check if friend was removed
+        const removed = !dbUserData.friends.includes(params.friendId);
+        // return response with appropriate message
+        if (removed) {
+          res.json({ message: "Friend removed successfully!", dbUserData });
+        } else {
+          res.json(dbUserData);
+        }
       })
-      .catch(err => res.status(500).json(err));
+      .catch((err) => res.status(400).json(err));
   },
 
-  // 8. Check if friend was removed
-  checkFriendRemoved(req, res) {
-    User.findOne(req.params.id)
-      .then(userData => {
-        if (!userData.friends.includes(req.params.friendId)) {
-          res.json({ message: 'Friend removed successfully' });
-        } else {
-          res.json({ message: 'Friend was not removed' });
-        }
-      })
-      .catch(err => res.status(500).json(err));
-  }
+  // // 7. Remove friend from user's friend list
+  // removeFriend(req, res) {
+  //   User.findOneAndUpdate(
+  //     req.params.id,
+  //     { $pull: { friends: req.params.friendId } },
+  //     { new: true }
+  //   )
+  //     .then(userData => {
+  //       if (!userData) {
+  //         return res.status(404).json({ message: 'User not found' });
+  //       }
+  //       res.json(userData);
+  //     })
+  //     .catch(err => res.status(500).json(err));
+  // },
 };
+
+
 
 module.exports = UserController;
