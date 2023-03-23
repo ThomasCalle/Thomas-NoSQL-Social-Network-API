@@ -15,4 +15,5 @@ db.once('open', () => {
     });
   });
   
-  
+// Thank you for viewing!
+// Thomas Calle 😊
