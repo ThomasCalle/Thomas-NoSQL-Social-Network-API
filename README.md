@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description.
 
-Thomas' NoSQL SociaL Network API
+Thomas' NoSQL SociaL Network API is an application programming interface (API) that provides a set of endpoints for interacting with a NoSQL database to perform operations on a social networking application. The Socieal Network operations include: friends, users, thoughts and reaction data models, and to retrieve them by ID or all of them. The API is built using Node.js and Mongoose, and it provides a simple and scalable way to handle social networking data without the restrictions of traditional relational databases.
 
 ## Table of Contents:
 - [Overview](#Overview)

@@ -14,18 +14,6 @@ const UserController = {
       .then(userData => res.json(userData))
       .catch(err => res.status(500).json(err));
   },
-  // getUserById(req, res) {
-  //   console.log('Fetching user with ID:', req.params.id);
-  //   User.findById(req.params.id)
-  //     .then(userData => {
-  //       console.log('User data:', userData);
-  //       res.json(userData);
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //       res.status(500).json(err);
-  //     });
-  // },
   
   // 3. Create a user
   createUser(req, res) {
@@ -98,24 +86,8 @@ const UserController = {
       })
       .catch((err) => res.status(400).json(err));
   },
-
-  // // 7. Remove friend from user's friend list
-  // removeFriend(req, res) {
-  //   User.findOneAndUpdate(
-  //     req.params.id,
-  //     { $pull: { friends: req.params.friendId } },
-  //     { new: true }
-  //   )
-  //     .then(userData => {
-  //       if (!userData) {
-  //         return res.status(404).json({ message: 'User not found' });
-  //       }
-  //       res.json(userData);
-  //     })
-  //     .catch(err => res.status(500).json(err));
-  // },
 };
 
 
-
+// Export UserController
 module.exports = UserController;

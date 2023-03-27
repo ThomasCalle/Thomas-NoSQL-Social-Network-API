@@ -15,5 +15,6 @@ db.once('open', () => {
     });
   });
   
+// Please, reference the README.md for further insight
 // Thank you for viewing!
 // Thomas Calle 😊
