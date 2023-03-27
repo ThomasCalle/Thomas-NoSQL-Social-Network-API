@@ -57,7 +57,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 ### Figure 1. GIF.
 
 #### The following animation demonstrates the application functionality:
-!](/public/assets/images/)
+![](./Public/assets/images/Thomas_NoSQL.GIF)
 
 ## Usage Instructions:
 
