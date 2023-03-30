@@ -50,10 +50,10 @@ const UserController = {
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { friends: req.body.friendId } },
+      { $addToSet: { friends: req.body.friendId || req.params.friendId} },
       { new: true }
     )
-      .then(userData => {
+      .then(userData => {git 
         if (!userData) {
           return res.status(404).json({ message: 'User not found' });
         }
