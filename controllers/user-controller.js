@@ -53,7 +53,7 @@ const UserController = {
       { $addToSet: { friends: req.body.friendId || req.params.friendId} },
       { new: true }
     )
-      .then(userData => {git 
+      .then(userData => {
         if (!userData) {
           return res.status(404).json({ message: 'User not found' });
         }
